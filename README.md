@@ -1,12 +1,12 @@
 # Cura noVNC Docker Container
 
-### This is a work-in-progress and the Docker image is larger than I'd like it to be. More updates to come soon!
-
 ## Overview
 
 This is a super basic noVNC build using supervisor to serve Cura in your favorite web browser. This was primarily built for users using the [popular unraid NAS software](https://unraid.net), to allow them to quickly hop in a browser, slice, and upload their favorite 3D prints. 
 
 This is super similar to my [prusaslicer-novnc](https://github.com/helfrichmichael/prusaslicer-novnc) container and basically just adapts that for using Cura via VNC.
+
+Please note: This is a work-in-progress and the Docker image is larger than I'd like it to be. More updates to come soon. Specifically the image is using the extracted AppImage version which results in extra copies of dependencies that might already exist.
 
 ## How to use
 
