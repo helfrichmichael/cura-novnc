@@ -16,9 +16,9 @@ If you're using unraid, open your Docker page and under `Template repositories`,
 
 **Outside of unraid**
 
-To run this image, you can run the following command: `docker run --detach --volume=cura-novnc-data:/home/cura/ -p 8080:8080 --name=cura-novnc cura-novnc`
+To run this image, you can run the following command: `docker run --detach --volume=cura-novnc-data:/home/cura/ --volume=cura-novnc-prints:/prints/ -p 8080:8080 --name=cura-novnc cura-novnc`
 
-This will bind `/home/cura/` in the container to a local volume on my machine named `cura-novnc-data`, and finally, it will bind port `8080` to `8080`.
+This will bind `/home/cura/` in the container to a local volume on my machine named `cura-novnc-data`. Additionally it will bind `/prints/` in the container to `cura-novnc-prints` locally on my machine. Finally it will bind port `8080` to `8080`.
 
 ## Links
 
