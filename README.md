@@ -29,3 +29,17 @@ This will bind `/home/cura/` in the container to a local volume on my machine na
 [GitHub Source](https://github.com/helfrichmichael/cura-novnc)
 
 [Docker](https://hub.docker.com/r/mikeah/cura-novnc)
+
+## Note for those who installed prior to 02/13/22
+
+This is not required, but a quality of life improvement. If you installed prior to February 13, please consider manually running the following commands to set some helpful environment configurations as it will not set on existing configurations. The commands will do the following:
+
+1. It will set your default Downloads for Firefox to /prints/ for easy slicing.
+2. It will add /prints/ as a bookmark in all the file selector views.
+
+To get this, run the following commands:
+
+```
+echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/cura/.config/user-dirs.dirs
+echo "file:///prints prints" >> /home/cura/.gtk-bookmarks 
+```

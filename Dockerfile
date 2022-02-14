@@ -42,7 +42,13 @@ RUN chmod +x /cura/get_latest_cura_release.sh \
   && groupadd cura \
   && useradd -g cura --create-home --home-dir /home/cura cura \
   && mkdir -p /cura \
-  && chown -R cura:cura /cura /home/cura
+  && mkdir -p /prints/ \
+  && chown -R cura:cura /cura/ /home/cura/ /prints/ \
+  && mkdir -p /home/cura/.config/ \
+  # We can now set the Download directory for Firefox and other browsers. 
+  # We can also add /prints/ to the file explorer bookmarks for easy access.
+  && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/cura/.config/user-dirs.dirs \
+  && echo "file:///prints prints" >> /home/cura/.gtk-bookmarks 
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY menu.xml /etc/xdg/openbox/
@@ -50,6 +56,7 @@ COPY supervisord.conf /etc/
 EXPOSE 8080
 
 VOLUME /home/cura/
+VOLUME /prints/
 
-# It's time! Let's get to work!
-CMD ["bash", "-c", "chown -R cura:cura /dev/stdout && exec gosu cura supervisord"]
+# It's time! Let's get to work! We use /home/cura/ as a bindable volume for Cura and its configurations. We use /prints/ to provide a location for STLs and GCODE files.
+CMD ["bash", "-c", "chown -R cura:cura /home/cura/ /prints/ /dev/stdout && exec gosu cura supervisord"]
