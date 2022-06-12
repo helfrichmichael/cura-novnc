@@ -45,8 +45,8 @@ RUN chmod +x /cura/get_latest_cura_release.sh \
   && mkdir -p /prints/ \
   && chown -R cura:cura /cura/ /home/cura/ /prints/ \
   && mkdir -p /home/cura/.config/ \
-#   # We can now set the Download directory for Firefox and other browsers. 
-#   # We can also add /prints/ to the file explorer bookmarks for easy access.
+  # We can now set the Download directory for Firefox and other browsers. 
+  # We can also add /prints/ to the file explorer bookmarks for easy access.
   && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/cura/.config/user-dirs.dirs \
   && echo "file:///prints prints" >> /home/cura/.gtk-bookmarks 
 
