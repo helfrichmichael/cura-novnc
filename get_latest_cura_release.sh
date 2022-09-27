@@ -47,11 +47,11 @@ fi
 
 if [[ "$1" == "url" ]]; then
 
-  echo "${releaseInfo}" | jq -r '.assets[] | .browser_download_url | select(test("Ultimaker_Cura-.+(-\\w)?+.AppImage?.(?!.)"))'
+  echo "${releaseInfo}" | jq -r '.assets[] | .browser_download_url | select(test("Ultimaker-Cura-.+(-\\w)?+linux.AppImage?.(?!.)"))'
 
 elif [[ "$1" == "name" ]]; then
 
-  echo "${releaseInfo}" | jq -r '.assets[] | .name | select(test("Ultimaker_Cura-.+(-\\w)?+.AppImage?.(?!.)"))'
+  echo "${releaseInfo}" | jq -r '.assets[] | .name | select(test("Ultimaker-Cura-.+(-\\w)?+linux.AppImage?.(?!.)"))'
 
 elif [[ "$1" == "url_ver" ]]; then
 
