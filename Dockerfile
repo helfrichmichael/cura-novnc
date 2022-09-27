@@ -1,5 +1,5 @@
 # Get and install Easy noVNC.
-FROM golang:bullseye AS easy-novnc-build
+FROM golang:1.17-bullseye AS easy-novnc-build
 WORKDIR /src
 RUN go mod init build && \
     go get github.com/geek1011/easy-novnc@v1.1.0 && \
@@ -14,13 +14,13 @@ RUN apt-get update -y && \
 
 # Get all of the remaining dependencies for the OS, VNC, and Cura (additionally Firefox-ESR to sign-in to Ultimaker if you'd like).
 RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends lxterminal nano wget openssh-client rsync ca-certificates htop tar xzip gzip bzip2 zip unzip && \
+    apt-get install -y --no-install-recommends lxterminal nano wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip && \
     rm -rf /var/lib/apt/lists
 
 RUN apt update && apt install -y --no-install-recommends --allow-unauthenticated \
         lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
         freeglut3 libgtk2.0-dev libwxgtk3.0-gtk3-dev libwx-perl libxmu-dev libgl1-mesa-glx libgl1-mesa-dri  \
-        xdg-utils locales locales-all pcmanfm jq curl git firefox-esr \
+        xdg-utils locales locales-all pcmanfm jq curl git firefox-esr qtbase5-dev \
     && apt autoclean -y \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
@@ -59,4 +59,4 @@ VOLUME /home/cura/
 VOLUME /prints/
 
 # It's time! Let's get to work! We use /home/cura/ as a bindable volume for Cura and its configurations. We use /prints/ to provide a location for STLs and GCODE files.
-CMD ["bash", "-c", "chown -R cura:cura /home/cura/ /prints/ /dev/stdout && exec gosu cura supervisord"]
+CMD ["/bin/bash", "-c", "chown -R cura:cura /home/cura/ /prints/ /dev/stdout && exec gosu cura supervisord"]

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Get the latest release of PrusaSlicer for Linux (non-AppImage) using the GitHub API
+# Get the latest release of Cura for Linux (AppImage) using the GitHub API
 # This was forked from https://github.com/dmagyar/prusaslicer-vnc-docker/blob/main/getLatestPrusaSlicerRelease.sh
 
 set -eu
@@ -46,21 +46,16 @@ if [[ $# -gt 1 ]]; then
 fi
 
 if [[ "$1" == "url" ]]; then
-
-  echo "${releaseInfo}" | jq -r '.assets[] | .browser_download_url | select(test("Ultimaker-Cura-.+(-\\w)?+linux.AppImage?.(?!.)"))'
+  echo "${releaseInfo}" | jq -r '.assets[] | .browser_download_url | select(test("Ultimaker-Cura-.+(-\\w)?+.AppImage?.(?!.)"))'
 
 elif [[ "$1" == "name" ]]; then
 
-  echo "${releaseInfo}" | jq -r '.assets[] | .name | select(test("Ultimaker-Cura-.+(-\\w)?+linux.AppImage?.(?!.)"))'
+  echo "${releaseInfo}" | jq -r '.assets[] | .name | select(test("Ultimaker-Cura-.+(-\\w)?+.AppImage?.(?!.)"))'
 
 elif [[ "$1" == "url_ver" ]]; then
 
   # Note: Releases sometimes have hex-encoded ascii characters tacked on
   # So version '2.0.0+' might need to be requested as '2.0.0%2B' since GitHub returns that as the download URL
-  echo "${allReleases}" | jq --arg VERSION "$VER" -r '.[] | .assets[] | .browser_download_url | select(test(Ultimaker_Cura-" + $VERSION + "+.AppImage?.(?!.)"))'
-
-elif [[ "$1" == "name_ver" ]]; then
-   
-  echo "${allReleases}" | jq --arg VERSION "$VER" -r '.[] | .assets[] | .name | select(test("PrusaSlicer-" + $VERSION + "\\+.AppImage?.(?!.)"))'
+  echo "${allReleases}" | jq --arg VERSION "$VER" -r '.[] | .assets[] | .browser_download_url | select(test(Ultimaker-Cura-" + $VERSION + "+.AppImage?.(?!.)"))'
 
 fi
