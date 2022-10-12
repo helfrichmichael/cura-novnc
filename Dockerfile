@@ -36,6 +36,9 @@ RUN chmod +x /cura/get_latest_cura_release.sh \
   && rm -f /cura/releaseInfo.json \
   && chmod +x /cura/${curaReleaseName} \
   && /cura/${curaReleaseName} --appimage-extract \
+  # Below, we adjust the platform theme to GTK3 per https://github.com/Ultimaker/Cura/issues/12266#issuecomment-1274861668.
+  # Without this, the file dialog is never functional/visible with Cura due to the uncompiled App Image.
+  && sed -i 's/QT_QPA_PLATFORMTHEME=xdgdesktopportal/QT_QPA_PLATFORMTHEME=gtk3/' /cura/squashfs-root/AppRun \
   && rm /cura/${curaReleaseName} \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get autoclean \
