@@ -24,11 +24,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Get current date/time in the usual format
-        id: version
-        run: echo "::set-output name=version::$(sh get_release_info.sh version)"
-
-
+      # - name: Get current date/time in the usual format
+      #   id: version
+      #   run: echo "::set-output name=version::$(sh get_release_info.sh version)"
+      - name: Extract Version
+        run: echo "version=$(sh get_release_info.sh version)" |tee -a $GITHUB_OUTPUT
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
