@@ -33,9 +33,9 @@ jobs:
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
-      - name: Env
-        id: env
-        run: env | tee /tmp/env.txt; cat /tmp/env.txt
+      # - name: Env
+      #   id: env
+      #   run: env | tee /tmp/env.txt; cat /tmp/env.txt
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
@@ -44,4 +44,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest, ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.date.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest, ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.version.outputs.version }}
