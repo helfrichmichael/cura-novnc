@@ -28,13 +28,14 @@ jobs:
       #   id: version
       #   run: echo "::set-output name=version::$(sh get_release_info.sh version)"
       - name: Extract Version
+        id: version
         run: echo "version=$(sh get_release_info.sh version)" |tee -a $GITHUB_OUTPUT
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: mikeah/cura-novnc:latest,  mikeah/cura-novnc:${{ steps.date.outputs.date }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.GITHUB_REPOSITORY }}:latest, ${{ env.REGISTRY }}/${{ env.GITHUB_REPOSITORY }}:${{ steps.date.outputs.version }}
