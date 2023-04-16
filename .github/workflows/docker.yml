@@ -38,4 +38,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.GITHUB_REPOSITORY }}:latest, ${{ env.REGISTRY }}/${{ env.GITHUB_REPOSITORY }}:${{ steps.date.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ vars.GITHUB_REPOSITORY }}:latest, ${{ env.REGISTRY }}/${{ vars.GITHUB_REPOSITORY }}:${{ steps.date.outputs.version }}
