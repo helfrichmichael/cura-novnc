@@ -44,4 +44,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/$GITHUB_REPOSITORY:latest, ${{ env.REGISTRY }}/$GITHUB_REPOSITORY:${{ steps.date.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest, ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.date.outputs.version }}
