@@ -33,9 +33,15 @@ jobs:
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
+      - name: Env
+        id: env
+        run: env | tee /tmp/env.txt; cat /tmp/env.txt
+      # - name: Get current date/time in the usual format
+      #   id: date
+      #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ GITHUB_REPOSITORY }}:latest, ${{ env.REGISTRY }}/${{ GITHUB_REPOSITORY }}:${{ steps.date.outputs.version }}
+          tags: ${{ env.REGISTRY }}/$GITHUB_REPOSITORY:latest, ${{ env.REGISTRY }}/$GITHUB_REPOSITORY:${{ steps.date.outputs.version }}
