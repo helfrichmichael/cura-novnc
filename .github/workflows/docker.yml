@@ -30,18 +30,23 @@ jobs:
       - name: Extract Version
         id: version
         run: echo "version=$(sh get_release_info.sh version)" |tee -a $GITHUB_OUTPUT
+      - name: Extract Version
+        id: skopeo
+        run: echo "list-images=$(skopeo list-tags docker://${{ env.REGISTRY }}/${{ github.repository }})" |tee -a $GITHUB_OUTPUT
+
+
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
-      # - name: Env
-      #   id: env
-      #   run: env | tee /tmp/env.txt; cat /tmp/env.txt
+      - name: Env
+        id: env
+        run: echo ${{ steps.skopeo.outputs.list-images }}
       # - name: Get current date/time in the usual format
       #   id: date
       #   run: echo "::set-output name=date::$(date +'%Y.%m.%d.%H%M%S')"
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest, ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.version.outputs.version }}
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ github.repository }}:latest, ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.version.outputs.version }}
