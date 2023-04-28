@@ -26,12 +26,12 @@ RUN apt update && apt install -y --no-install-recommends --allow-unauthenticated
     && rm -rf /var/lib/apt/lists/*
 
 # Install Cura!
-ADD get_latest_cura_release.sh cura/
+ADD get_release_info.sh cura/
 WORKDIR /cura
 
-RUN chmod +x /cura/get_latest_cura_release.sh \
-  && latestCura=$(/cura/get_latest_cura_release.sh url) \
-  && curaReleaseName=$(/cura/get_latest_cura_release.sh name) \
+RUN chmod +x /cura/get_release_info.sh \
+  && latestCura=$(/cura/get_release_info.sh url) \
+  && curaReleaseName=$(/cura/get_release_info.sh name) \
   && curl -sSL ${latestCura} > ${curaReleaseName} \
   && rm -f /cura/releaseInfo.json \
   && chmod +x /cura/${curaReleaseName} \
@@ -48,10 +48,10 @@ RUN chmod +x /cura/get_latest_cura_release.sh \
   && mkdir -p /prints/ \
   && chown -R cura:cura /cura/ /home/cura/ /prints/ \
   && mkdir -p /home/cura/.config/ \
-  # We can now set the Download directory for Firefox and other browsers. 
+  # We can now set the Download directory for Firefox and other browsers.
   # We can also add /prints/ to the file explorer bookmarks for easy access.
   && echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/cura/.config/user-dirs.dirs \
-  && echo "file:///prints prints" >> /home/cura/.gtk-bookmarks 
+  && echo "file:///prints prints" >> /home/cura/.gtk-bookmarks
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY menu.xml /etc/xdg/openbox/
