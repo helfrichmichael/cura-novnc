@@ -44,4 +44,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: mikeah/cura-novnc:latest, mikeah/cura-novnc:latest:${{ steps.version.outputs.version }}
+          tags: mikeah/cura-novnc:latest, mikeah/cura-novnc:${{ steps.version.outputs.version }}
