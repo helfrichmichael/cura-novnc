@@ -14,7 +14,7 @@ RUN apt-get update -y && \
 
 # Get all of the remaining dependencies for the OS, VNC, and Cura (additionally Firefox-ESR to sign-in to Ultimaker if you'd like).
 RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends lxterminal nano wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip && \
+    apt-get install -y --no-install-recommends openscad lxterminal nano wget openssh-client rsync ca-certificates xdg-utils htop tar xzip gzip bzip2 zip unzip && \
     rm -rf /var/lib/apt/lists
 
 RUN apt update && apt install -y --no-install-recommends --allow-unauthenticated \
