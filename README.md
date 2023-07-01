@@ -20,6 +20,10 @@ To run this image, you can run the following command: `docker run --detach --vol
 
 This will bind `/home/cura/` in the container to a local volume on my machine named `cura-novnc-data`. Additionally it will bind `/prints/` in the container to `cura-novnc-prints` locally on my machine. Finally it will bind port `8080` to `8080`.
 
+** Using a VNC Viewer **
+
+To use a VNC viewer with the container, the default port for X TigerVNC is 5900. You can add this port by adding `-p 5900:5900` to your command to start the container to open this port for access.
+
 ## Links
 
 [Cura](https://github.com/Ultimaker/Cura)
@@ -30,16 +34,4 @@ This will bind `/home/cura/` in the container to a local volume on my machine na
 
 [Docker](https://hub.docker.com/r/mikeah/cura-novnc)
 
-## Note for those who installed prior to 02/13/22
-
-This is not required, but a quality of life improvement. If you installed prior to February 13, please consider manually running the following commands to set some helpful environment configurations as it will not set on existing configurations. The commands will do the following:
-
-1. It will set your default Downloads for Firefox to /prints/ for easy slicing.
-2. It will add /prints/ as a bookmark in all the file selector views.
-
-To get this, run the following commands:
-
-```
-echo "XDG_DOWNLOAD_DIR=\"/prints/\"" >> /home/cura/.config/user-dirs.dirs
-echo "file:///prints prints" >> /home/cura/.gtk-bookmarks 
-```
+<a href="https://www.buymeacoffee.com/helfrichmichael" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>

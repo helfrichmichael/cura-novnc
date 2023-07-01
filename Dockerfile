@@ -56,7 +56,12 @@ RUN chmod +x /cura/get_release_info.sh \
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY menu.xml /etc/xdg/openbox/
 COPY supervisord.conf /etc/
+
+# HTTP Port
 EXPOSE 8080
+
+# VNC Port
+EXPOSE 5900
 
 VOLUME /home/cura/
 VOLUME /prints/
