@@ -20,7 +20,7 @@ To run this image, you can run the following command: `docker run --detach --vol
 
 This will bind `/home/cura/` in the container to a local volume on my machine named `cura-novnc-data`. Additionally it will bind `/prints/` in the container to `cura-novnc-prints` locally on my machine. Finally it will bind port `8080` to `8080`.
 
-** Using a VNC Viewer **
+**Using a VNC Viewer**
 
 To use a VNC viewer with the container, the default port for X TigerVNC is 5900. You can add this port by adding `-p 5900:5900` to your command to start the container to open this port for access.
 
