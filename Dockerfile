@@ -66,5 +66,8 @@ EXPOSE 5900
 VOLUME /home/cura/
 VOLUME /prints/
 
+# Enable printing with USB (https://github.com/helfrichmichael/cura-novnc/issues/7)
+RUN usermod -aG dialout cura
+
 # It's time! Let's get to work! We use /home/cura/ as a bindable volume for Cura and its configurations. We use /prints/ to provide a location for STLs and GCODE files.
 CMD ["/bin/bash", "-c", "chown -R cura:cura /home/cura/ /prints/ /dev/stdout && exec gosu cura supervisord"]
