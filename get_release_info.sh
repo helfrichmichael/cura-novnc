@@ -4,8 +4,8 @@ TMPDIR="$(mktemp -d)"
 
 curl -SsL https://api.github.com/repos/Ultimaker/Cura/releases/latest > $TMPDIR/latest.json
 
-url=$(jq -r '.assets[] | select(.browser_download_url|test("-linux.AppImage$"))| .browser_download_url' $TMPDIR/latest.json)
-name=$(jq -r '.assets[] | select(.browser_download_url|test("-linux.AppImage$"))| .name' $TMPDIR/latest.json)
+url=$(jq -r '.assets[] | select(.browser_download_url|test("-linux-X64.AppImage$"))| .browser_download_url' $TMPDIR/latest.json)
+name=$(jq -r '.assets[] | select(.browser_download_url|test("-linux-X64.AppImage$"))| .name' $TMPDIR/latest.json)
 version=$(jq -r .tag_name $TMPDIR/latest.json)
 
 if [ $# -ne 1 ]; then
